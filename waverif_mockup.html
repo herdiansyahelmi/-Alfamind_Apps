@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp - Alfamind Verification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0b141a;
+            max-width: 375px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .whatsapp-header {
+            background: #202c33;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+
+        .back-arrow {
+            font-size: 20px;
+            color: #8696a0;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #e9edef;
+        }
+
+        .contact-status {
+            font-size: 13px;
+            color: #8696a0;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            color: #8696a0;
+            font-size: 18px;
+        }
+
+        .chat-container {
+            background: #0b141a;
+            min-height: calc(100vh - 120px);
+            padding: 20px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23pattern)"/></svg>');
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message.received {
+            align-items: flex-start;
+        }
+
+        .message-bubble {
+            background: #202c33;
+            color: #e9edef;
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 280px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.received .message-bubble {
+            border-bottom-left-radius: 3px;
+        }
+
+        .message-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-right-color: #202c33;
+            border-bottom-color: #202c33;
+            border-left: none;
+            border-top: none;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #8696a0;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .verification-code {
+            background: #1f2937;
+            color: #10b981;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 8px 0;
+            text-align: center;
+            border: 1px solid #10b981;
+        }
+
+        .visit-button {
+            background: #25d366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 10px 0;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .visit-button:hover {
+            background: #20c55e;
+        }
+
+        .input-area {
+            background: #202c33;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 375px;
+        }
+
+        .input-field {
+            flex: 1;
+            background: #2a3942;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            color: #e9edef;
+            font-size: 14px;
+        }
+
+        .input-field::placeholder {
+            color: #8696a0;
+        }
+
+        .send-button {
+            background: #25d366;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message.sent {
+            align-items: flex-end;
+        }
+
+        .message.sent .message-bubble {
+            background: #005c4b;
+            border-bottom-right-radius: 3px;
+        }
+
+        .message.sent .message-bubble::before {
+            left: auto;
+            right: -8px;
+            border-left-color: #005c4b;
+            border-bottom-color: #005c4b;
+            border-right: none;
+        }
+            width: 40px;
+            height: 40px;
+            background: #dc2626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="whatsapp-header">
+        <div class="back-arrow">←</div>
+        <div class="alfamind-logo">A</div>
+        <div class="contact-info">
+            <div class="contact-name">Alfamind</div>
+            <div class="contact-status">online</div>
+        </div>
+        <div class="header-icons">
+            <span>📞</span>
+            <span>📹</span>
+            <span>⋮</span>
+        </div>
+    </div>
+
+    <div class="chat-container">
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="messageInput" class="input-field" placeholder="Ketik pesan" onkeypress="handleEnter(event)" readonly>
+        <button class="send-button" onclick="sendMessage()">➤</button>
+    </div>
+
+    <script>
+        // Auto-fill message when page loads
+        window.onload = function() {
+            const now = new Date();
+            const date = now.toLocaleDateString('id-ID');
+            const time = now.toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit'});
+            
+            const autoMessage = `Verifikasi registrasi Alfamind
+Tanggal: ${date}
+Jam: ${time}
+Kode Verifikasi: 123456`;
+            
+            document.getElementById('messageInput').value = autoMessage;
+            
+            // Auto-send after 2 seconds
+            setTimeout(() => {
+                sendMessage();
+            }, 2000);
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            // Add sent message to chat
+            const chatContainer = document.querySelector('.chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message sent';
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    ${message.replace(/\n/g, '<br>')}
+                </div>
+                <div class="message-time">${getCurrentTime()}</div>
+            `;
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // Clear input
+            input.value = '';
+            
+            // Auto reply from Alfamind after 2 seconds
+            setTimeout(() => {
+                addVerificationSuccess();
+            }, 2000);
+        }
+        
+        function addVerificationSuccess() {
+            const chatContainer = document.querySelector('.chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message received';
+            
+            const replyText = `✅ Verifikasi Berhasil!
+            
+Terima kasih, registrasi Anda telah berhasil diverifikasi.
+
+Data Anda:
+• Status: Terverifikasi ✓
+• Waktu: ${getCurrentTime()}
+• Member ID: ALF${Math.random().toString().substr(2, 6)}
+
+Silakan lanjutkan ke aplikasi Alfamind untuk menyelesaikan registrasi.
+
+<a href="#" class="visit-button" onclick="goBackToRegistration()">Lanjutkan ke Aplikasi</a>`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    ${replyText}
+                </div>
+                <div class="message-time">${getCurrentTime()}</div>
+            `;
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        function goBackToRegistration() {
+            // Redirect back to registration step 3 (Upload KTP)
+            window.location.href = 'xQDev_Registration_Flow_Mockup.html?step=3';
+        }
+    </script>
+</body>
+</html>
