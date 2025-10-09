@@ -380,8 +380,7 @@
         document.querySelector('.pay-btn').addEventListener('click', function() {
             const selected = document.querySelector('.radio-btn.selected');
             if (selected) {
-                const method = selected.closest('.payment-option').dataset.method;
-                alert('Processing payment with: ' + method);
+                window.location.href = 'transaction-flow-mockup.html#screen5';
             } else {
                 alert('Please select a payment method');
             }

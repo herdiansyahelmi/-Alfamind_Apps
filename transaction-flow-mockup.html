@@ -988,7 +988,19 @@
         }
 
         // Initialize
-        showScreen(1);
+        function initializeScreen() {
+            // Check if there's a hash in the URL
+            const hash = window.location.hash;
+            if (hash === '#screen5') {
+                currentScreen = 5;
+                showScreen(5);
+                startCountdown();
+            } else {
+                showScreen(1);
+            }
+        }
+        
+        initializeScreen();
     </script>
 </body>
 </html>
