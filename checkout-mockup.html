@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 375px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #d32f2f;
+        }
+
+        .section {
+            padding: 20px;
+            border-bottom: 8px solid #f5f5f5;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #d32f2f;
+            margin-bottom: 15px;
+        }
+
+        .shipment-info {
+            margin-bottom: 20px;
+        }
+
+        .shipment-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .shipment-location {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product-image {
+            width: 50px;
+            height: 50px;
+            background: #e8f5e8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff9800;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .product-quantity {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .price-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .original-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 12px;
+        }
+
+        .discount-percent {
+            background: #ff9800;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .current-price {
+            color: #d32f2f;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .address-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .address-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .phone {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .address {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .change-btn {
+            background: none;
+            border: 1px solid #d32f2f;
+            color: #d32f2f;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .shipping-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .shipping-method {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .shipping-price {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .notes-section {
+            border: 1px solid #d32f2f;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .notes-input {
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .summary-label {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .summary-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .voucher-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .voucher-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        .voucher-btn {
+            background: #ffe0e0;
+            border: none;
+            color: #d32f2f;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .total-section {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 375px;
+            background: white;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .total-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .total-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #d32f2f;
+        }
+
+        .payment-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status-bar">
+            <span>14:46 📷</span>
+            <div>
+                <span>5G 📶 85</span>
+            </div>
+        </div>
+
+        <div class="header">
+            <button class="back-btn">←</button>
+            <h1 class="header-title">Checkout</h1>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Barang</h2>
+            
+            <div class="shipment-info">
+                <div class="shipment-title">Pengiriman #1 (1 Barang)</div>
+                <div class="shipment-location">KOTA TANGERANG</div>
+            </div>
+
+            <div class="product-item">
+                <div class="product-image">
+                    <div style="width: 30px; height: 30px; background: #4caf50; border-radius: 4px;"></div>
+                    <div class="discount-badge">9%</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-name">ECENTIO TUMBLER STAINLESS 900ML (GREEN) ET0201A51506 (CKK)</div>
+                    <div class="product-quantity">1 Barang</div>
+                    <div class="price-info">
+                        <span class="original-price">Rp 160.800</span>
+                        <span class="discount-percent">9%</span>
+                    </div>
+                    <div class="current-price">Rp 145.000</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="address-section">
+                <div class="address-info">
+                    <h3>Alamat Pengiriman</h3>
+                    <div style="font-weight: 600; margin-bottom: 5px;">Jakarta</div>
+                    <div class="phone">081380760453</div>
+                    <div class="address">Jl. Jakarta 01, KARET TENGSIN, TANAH ABANG, KOTA JAKARTA PUSAT, DKI JAKARTA, 12543</div>
+                </div>
+                <button class="change-btn">Ubah Alamat</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 15px;">Layanan Pengiriman</h3>
+            
+            <div class="shipping-section">
+                <div class="shipping-method">JNE</div>
+                <button class="change-btn">Ubah Kurir</button>
+            </div>
+
+            <div class="shipping-section">
+                <div>
+                    <div class="shipping-method">JNE REG</div>
+                    <div class="shipping-price">Rp 10.000</div>
+                </div>
+                <button class="change-btn">Ubah Layanan</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="notes-section">
+                <input type="text" class="notes-input" placeholder="💬 Tulis Catatan untuk Penjual">
+            </div>
+
+            <div class="summary-row">
+                <span class="summary-label">Subtotal</span>
+                <span class="summary-value">Rp 141.937 ▼</span>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin: 20px 0 15px;">Kode Voucher</h3>
+            <div class="voucher-section">
+                <input type="text" class="voucher-input" placeholder="🎫 Masukkan kode voucher">
+                <button class="voucher-btn">Pakai</button>
+            </div>
+        </div>
+
+        <div style="padding-bottom: 100px;"></div>
+
+        <div class="total-section">
+            <div class="total-info">
+                <div class="total-label">Total Pesanan</div>
+                <div class="total-price">Rp 141.937 ▲</div>
+            </div>
+            <button class="payment-btn">Pilih Pembayaran</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.back-btn').addEventListener('click', function() {
+            window.history.back();
+        });
+
+        document.querySelector('.payment-btn').addEventListener('click', function() {
+            window.location.href = 'payment-mockup.html';
+        });
+
+        document.querySelectorAll('.change-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Change option clicked: ' + this.textContent);
+            });
+        });
+
+        document.querySelector('.voucher-btn').addEventListener('click', function() {
+            const voucherCode = document.querySelector('.voucher-input').value;
+            if (voucherCode) {
+                alert('Voucher applied: ' + voucherCode);
+            } else {
+                alert('Please enter voucher code');
+            }
+        });
+    </script>
+</body>
+</html>

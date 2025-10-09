@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 375px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #d32f2f;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            background-color: #f9f9f9;
+        }
+
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .wallet-icon {
+            background: #333;
+            color: white;
+            font-size: 20px;
+        }
+
+        .bank-icon {
+            background: #f0f0f0;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .bni-icon {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .mandiri-icon {
+            background: #003d7a;
+            color: white;
+        }
+
+        .bri-icon {
+            background: #0066cc;
+            color: white;
+        }
+
+        .cimb-icon {
+            background: #dc143c;
+            color: white;
+        }
+
+        .bca-icon {
+            background: #0066cc;
+            color: white;
+        }
+
+        .payment-info {
+            flex: 1;
+        }
+
+        .payment-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .payment-balance {
+            font-size: 14px;
+            color: #d32f2f;
+            font-weight: 600;
+        }
+
+        .topup-btn {
+            background: none;
+            border: 1px solid #d32f2f;
+            color: #d32f2f;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        .radio-btn {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            margin-left: 15px;
+            position: relative;
+        }
+
+        .radio-btn.selected {
+            border-color: #ff9800;
+        }
+
+        .radio-btn.selected::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #ff9800;
+            border-radius: 50%;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-header-title {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .section-header-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .expand-icon {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .total-section {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 375px;
+            background: white;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .total-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .total-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #d32f2f;
+        }
+
+        .pay-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 375px;
+            background: white;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .nav-item {
+            width: 24px;
+            height: 24px;
+            background: #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status-bar">
+            <span>14:46</span>
+            <div>
+                <span>5G 📶 85</span>
+            </div>
+        </div>
+
+        <div class="header">
+            <button class="back-btn">←</button>
+            <h1 class="header-title">Pembayaran</h1>
+        </div>
+
+        <h2 class="section-title">Pilih Metode Pembayaran</h2>
+
+        <div class="payment-option" data-method="alfamind">
+            <div class="payment-icon wallet-icon">💳</div>
+            <div class="payment-info">
+                <div class="payment-name">Saldo Alfamind</div>
+                <div class="payment-balance">Rp 73.560</div>
+                <button class="topup-btn">Topup Saldo</button>
+            </div>
+            <div class="radio-btn"></div>
+        </div>
+
+        <div class="section-header">
+            <div class="section-header-title">
+                <span class="section-header-icon">🏛️</span>
+                Virtual Account
+            </div>
+            <span class="expand-icon">▲</span>
+        </div>
+
+        <div class="payment-option" data-method="bni">
+            <div class="payment-icon bank-icon bni-icon">BNI</div>
+            <div class="payment-info">
+                <div class="payment-name">Bank BNI</div>
+            </div>
+            <div class="radio-btn selected"></div>
+        </div>
+
+        <div class="payment-option" data-method="mandiri">
+            <div class="payment-icon bank-icon mandiri-icon">mandiri</div>
+            <div class="payment-info">
+                <div class="payment-name">Mandiri</div>
+            </div>
+            <div class="radio-btn"></div>
+        </div>
+
+        <div class="payment-option" data-method="bri">
+            <div class="payment-icon bank-icon bri-icon">BRI</div>
+            <div class="payment-info">
+                <div class="payment-name">Bank BRI</div>
+            </div>
+            <div class="radio-btn"></div>
+        </div>
+
+        <div class="payment-option" data-method="cimb">
+            <div class="payment-icon bank-icon cimb-icon">CIMB</div>
+            <div class="payment-info">
+                <div class="payment-name">CIMB Niaga</div>
+            </div>
+            <div class="radio-btn"></div>
+        </div>
+
+        <div class="payment-option" data-method="bca">
+            <div class="payment-icon bank-icon bca-icon">BCA</div>
+            <div class="payment-info">
+                <div class="payment-name">BCA</div>
+            </div>
+            <div class="radio-btn"></div>
+        </div>
+
+        <div style="padding-bottom: 160px;"></div>
+
+        <div class="total-section">
+            <div class="total-info">
+                <div class="total-label">Total Pesanan</div>
+                <div class="total-price">Rp 141.937 ▲</div>
+            </div>
+            <button class="pay-btn">Bayar</button>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-item"></div>
+            <div class="nav-item"></div>
+            <div class="nav-item"></div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.radio-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                
+                const radioBtn = this.querySelector('.radio-btn');
+                radioBtn.classList.add('selected');
+            });
+        });
+
+        document.querySelector('.back-btn').addEventListener('click', function() {
+            window.history.back();
+        });
+
+        document.querySelector('.pay-btn').addEventListener('click', function() {
+            const selected = document.querySelector('.radio-btn.selected');
+            if (selected) {
+                const method = selected.closest('.payment-option').dataset.method;
+                alert('Processing payment with: ' + method);
+            } else {
+                alert('Please select a payment method');
+            }
+        });
+
+        document.querySelector('.topup-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            alert('Redirecting to topup page...');
+        });
+
+        document.querySelector('.section-header').addEventListener('click', function() {
+            const icon = this.querySelector('.expand-icon');
+            icon.textContent = icon.textContent === '▲' ? '▼' : '▲';
+        });
+    </script>
+</body>
+</html>

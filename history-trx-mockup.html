@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfamind - Transaksi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            max-width: 375px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .notification-icon {
+            position: relative;
+            font-size: 20px;
+            color: #666;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc2626;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-icon {
+            font-size: 20px;
+            color: #666;
+        }
+        
+        .search-filter-section {
+            padding: 15px 20px;
+            background: white;
+            margin-bottom: 10px;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+        }
+        
+        .search-icon {
+            color: #999;
+            margin-right: 10px;
+        }
+        
+        .search-input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .filter-btn {
+            color: #dc2626;
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        
+        .tab-section {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #dc2626;
+            background: none;
+            color: #dc2626;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .tab-btn.active {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .content {
+            padding: 0 20px 80px 20px;
+        }
+        
+        .transaction-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .transaction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .transaction-date {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .transaction-id {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 5px;
+        }
+        
+        .status-badge {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .product-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .product-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .product-image.tumbler {
+            background: #e8f5e8;
+        }
+        
+        .product-image.telkomsel {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .product-details {
+            flex: 1;
+        }
+        
+        .product-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 2px;
+        }
+        
+        .product-code {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .product-qty {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .transaction-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .total-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .total-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #dc2626;
+        }
+        
+        .payment-code {
+            font-size: 10px;
+            color: #666;
+            text-align: right;
+            margin-bottom: 5px;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 375px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item {
+            text-align: center;
+            text-decoration: none;
+            color: #999;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+        
+        .nav-item.active {
+            color: #dc2626;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .nav-label {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">Transaksi</div>
+        <div class="header-icons">
+            <div class="notification-icon">
+                🔔
+                <div class="notification-badge">99+</div>
+            </div>
+            <div class="cart-icon" onclick="window.location.href='cart-mockup.html'" style="cursor: pointer;">🛒</div>
+        </div>
+    </div>
+
+    <div class="search-filter-section">
+        <div class="search-bar">
+            <div class="search-icon">🔍</div>
+            <input type="text" class="search-input" placeholder="Cari Transaksi">
+            <div class="filter-btn">Filter</div>
+        </div>
+        
+        <div class="tab-section">
+            <button class="tab-btn active">Aplikasi</button>
+            <button class="tab-btn">TokoSaya</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="transaction-item">
+            <div class="transaction-header">
+                <div>
+                    <div class="transaction-date">12 Sep 2025 14:46</div>
+                    <div class="transaction-id">O-250912-DMRRN</div>
+                </div>
+                <div class="status-badge">Batal</div>
+            </div>
+            
+            <div class="product-info">
+                <div class="product-image tumbler">🥤</div>
+                <div class="product-details">
+                    <div class="product-name">ECENTIO TUMBLER STAINLESS 900ML (GREEN)</div>
+                    <div class="product-code">ET0201A51506 (CKK)</div>
+                    <div class="product-qty">x1</div>
+                </div>
+            </div>
+            
+            <div class="transaction-total">
+                <div class="total-label">Total Transaksi</div>
+                <div class="total-amount">Rp 141.937</div>
+            </div>
+        </div>
+
+        <div class="transaction-item">
+            <div class="transaction-header">
+                <div>
+                    <div class="transaction-date">26 Aug 2025 11:43</div>
+                    <div class="transaction-id">O-250826-CQGHD</div>
+                </div>
+                <div class="payment-code">Kode Bayar Kadaluarsa</div>
+            </div>
+            
+            <div class="product-info">
+                <div class="product-image telkomsel">📱</div>
+                <div class="product-details">
+                    <div class="product-name">TELKOMSEL - RP 15.000</div>
+                    <div class="product-qty">x1</div>
+                </div>
+            </div>
+            
+            <div class="transaction-total">
+                <div class="total-label">Total Transaksi</div>
+                <div class="total-amount">Rp 16.100</div>
+            </div>
+        </div>
+
+        <div class="transaction-item">
+            <div class="transaction-header">
+                <div>
+                    <div class="transaction-date">26 Aug 2025 11:42</div>
+                    <div class="transaction-id">O-250826-PDCTX</div>
+                </div>
+                <div class="payment-code">Kode Bayar Kadaluarsa</div>
+            </div>
+            
+            <div class="product-info">
+                <div class="product-image telkomsel">📱</div>
+                <div class="product-details">
+                    <div class="product-name">TELKOMSEL - RP 10.000</div>
+                    <div class="product-qty">x1</div>
+                </div>
+            </div>
+            
+            <div class="transaction-total">
+                <div class="total-label">Total Transaksi</div>
+                <div class="total-amount">Rp 13.200</div>
+            </div>
+        </div>
+
+        <div class="transaction-item">
+            <div class="transaction-header">
+                <div>
+                    <div class="transaction-date">26 Aug 2025 11:41</div>
+                    <div class="transaction-id">O-250826-KCYZR</div>
+                </div>
+                <div class="payment-code">Kode Bayar Kadaluarsa</div>
+            </div>
+            
+            <div class="product-info">
+                <div class="product-image telkomsel">📱</div>
+                <div class="product-details">
+                    <div class="product-name">TELKOMSEL - RP 5.000</div>
+                    <div class="product-qty">x1</div>
+                </div>
+            </div>
+            
+            <div class="transaction-total">
+                <div class="total-label">Total Transaksi</div>
+                <div class="total-amount">Rp 6.400</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="home-mockup.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-label">Beranda</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">🏪</div>
+            <div class="nav-label">TokoSaya</div>
+        </a>
+        <a href="referral-mockup.html" class="nav-item">
+            <div class="nav-icon">👥</div>
+            <div class="nav-label">Komunitas</div>
+        </a>
+        <a href="#" class="nav-item active">
+            <div class="nav-icon">📊</div>
+            <div class="nav-label">Transaksi</div>
+        </a>
+        <a href="xQDev_Registration_Flow_Mockup.html" class="nav-item">
+            <div class="nav-icon">👤</div>
+            <div class="nav-label">Akun Saya</div>
+        </a>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const transactions = document.querySelectorAll('.transaction-item');
+            
+            transactions.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
