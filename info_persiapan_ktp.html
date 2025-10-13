@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info Persiapan KTP - Alfamind</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            max-width: 375px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-title {
+            color: #dc2626;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #dc2626;
+        }
+
+        .info-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .info-list li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        .warning-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .warning-box .warning-title {
+            color: #dc2626;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .warning-box li {
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #7f1d1d;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .warning-box li::before {
+            content: "⚠️";
+            margin-top: 1px;
+        }
+
+        .example-section {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .example-title {
+            color: #374151;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .ktp-example {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: white;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📄 Info Persiapan KTP</h1>
+        </div>
+
+        <div class="content">
+            <div class="info-section">
+                <div class="info-title">
+                    📋 Persyaratan Foto KTP
+                </div>
+                <div class="info-list">
+                    <ul>
+                        <li>Foto KTP asli (bukan fotokopi)</li>
+                        <li>Gambar jelas dan tidak buram</li>
+                        <li>Semua teks dapat terbaca dengan jelas</li>
+                        <li>Tidak ada bayangan atau pantulan cahaya</li>
+                        <li>KTP dalam kondisi baik (tidak rusak/sobek)</li>
+                        <li>Format file: JPG, PNG (maksimal 5MB)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">
+                    ⚠️ Hindari Kesalahan Berikut
+                </div>
+                <ul>
+                    <li>Foto terlalu gelap atau terlalu terang</li>
+                    <li>KTP miring atau tidak lurus</li>
+                    <li>Ada jari atau benda yang menutupi KTP</li>
+                    <li>Resolusi foto terlalu rendah</li>
+                    <li>KTP terpotong atau tidak lengkap</li>
+                </ul>
+            </div>
+
+            <div class="example-section">
+                <div class="example-title">Contoh KTP yang Benar</div>
+                <img src="KTP.jpg" alt="Contoh KTP" class="ktp-example">
+            </div>
+
+            <div class="info-section">
+                <div class="info-title">
+                    💡 Tips Foto KTP yang Baik
+                </div>
+                <div class="info-list">
+                    <ul>
+                        <li>Gunakan pencahayaan yang cukup</li>
+                        <li>Letakkan KTP di permukaan datar</li>
+                        <li>Foto dari atas dengan posisi sejajar</li>
+                        <li>Pastikan seluruh KTP masuk dalam frame</li>
+                        <li>Periksa hasil foto sebelum upload</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="goBack()">Upload KTP</button>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = 'xQDev_Registration_Flow_Mockup.html?step=3';
+        }
+    </script>
+</body>
+</html>
