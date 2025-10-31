@@ -664,7 +664,7 @@
         </div>
         
         <div class="alfamind-header">
-            <div class="alfamind-logo">Alfamind</div>
+            <img src="alfamind.png" alt="Alfamind" style="height: 30px;">
         </div>
         
         <div class="breadcrumb">
@@ -673,7 +673,7 @@
         
         <div class="order-number">
             <div style="color: #666; margin-bottom: 10px;">Nomor Order Anda</div>
-            <div class="order-id">O-251008-AVWDSVL</div>
+            <div class="order-id">O-251031-AVWDSVL</div>
         </div>
         
         <div style="padding: 20px;">
@@ -754,7 +754,7 @@
         </div>
         
         <div class="alfamind-header">
-            <div class="alfamind-logo">Alfamind</div>
+            <img src="alfamind.png" alt="Alfamind" style="height: 30px;">
         </div>
         
         <div class="breadcrumb">
@@ -782,7 +782,7 @@
             <div class="order-number" style="margin: 20px 0;">
                 <div style="display: flex; justify-content: space-between;">
                     <span style="color: #666;">Nomor Order Anda</span>
-                    <span style="font-weight: bold;">O-251008-AVWDSVL</span>
+                    <span style="font-weight: bold;">O-251031-AVWDSVL</span>
                 </div>
             </div>
             
@@ -793,32 +793,32 @@
         </div>
 
         <div class="content" id="qrisContent" style="display: none;">
-            <div class="success-icon">✓</div>
-            <div class="success-title">Terima Kasih !</div>
-            <div class="success-subtitle">Telah berbelanja di <span style="color: #dc2626; font-weight: bold;">ALFAMIND</span></div>
-            
-            <div style="text-align: center; margin-bottom: 20px;">
-                <div>Metode pembayaran yang anda pilih: <span style="color: #1e40af; font-weight: bold;">QRIS</span></div>
-                <div style="margin: 10px 0;">Silahkan scan QR Code di bawah ini</div>
-                <div style="font-size: 24px; font-weight: bold; color: #1e40af;">Rp 18.000,00</div>
-            </div>
-            
-            <div class="bank-info">
-                <img src="qris.jpg" alt="QRIS Code" style="width: 200px; height: 200px; border: 2px solid #333; margin: 0 auto 20px; display: block;">
-                <div style="margin: 10px 0;">Sisa Waktu Pembayaran :</div>
-                <div class="timer" id="qrisTimer">01 Jam 59 Menit 51 Detik</div>
-            </div>
-            
-            <div class="order-number" style="margin: 20px 0;">
-                <div style="display: flex; justify-content: space-between;">
-                    <span style="color: #666;">Nomor Order Anda</span>
-                    <span style="font-weight: bold;">O-251008-AVWDSVL</span>
+            <div style="text-align: center; padding: 20px;">
+                <div style="background: #fef3c7; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
+                    <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Nomor Order: <span style="font-weight: bold; color: #333;">O-251008-AVWDSVL</span></div>
                 </div>
-            </div>
-            
-            <div style="margin-bottom: 20px;">
-                <span style="color: #666;">Tata Cara Pembayaran</span>
-                <span style="float: right;">🔽</span>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Total Pembayaran: <span style="color: #1e40af;">Rp 18.000,00</span></div>
+                    <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Sisa waktu pembayaran:</div>
+                    <div class="timer" style="color: #dc2626; font-weight: bold; font-size: 16px;">01:58:44</div>
+                </div>
+                
+                <div style="border: 2px solid #333; padding: 10px; display: inline-block; margin-bottom: 20px;">
+                    <img src="qris.jpg" alt="QRIS Code" style="width: 180px; height: 180px; display: block;">
+                </div>
+                
+                <button style="background: #dc2626; color: white; border: none; padding: 10px 30px; border-radius: 25px; font-size: 14px; font-weight: bold; margin-bottom: 30px;" onclick="downloadQR()">Unduh Kode QRIS</button>
+                
+                <div style="text-align: left; font-size: 12px; color: #333; line-height: 1.4;">
+                    <div style="font-weight: bold; margin-bottom: 10px;">Cara Pembayaran Menggunakan QRIS</div>
+                    <div style="margin-bottom: 8px;">1. Unduh gambar kode QRIS.</div>
+                    <div style="margin-bottom: 8px;">2. Buka aplikasi pembayaran yang mendukung (e-wallet atau mobile banking yang mendukung pembayaran QRIS).</div>
+                    <div style="margin-bottom: 8px;">3. Pilih menu "Bayar" atau "Scan" dan sejenisnya untuk melakukan pembayaran. Pilih fitur galeri atau unggah/upload gambar yang menginginkan kode QRIS dari galeri ponsel. Atau bisa juga dengan aplikasi.</div>
+                    <div style="margin-bottom: 8px;">4. Pastikan jumlah yang akan dibayar sudah benar.</div>
+                    <div style="margin-bottom: 8px;">5. Pastikan jumlah yang akan dibayar sudah benar.</div>
+                    <div style="margin-bottom: 8px;">6. Ikuti instruksi selanjutnya hingga muncul "Bayar" [...]</div>
+                </div>
             </div>
         </div>
         
@@ -895,14 +895,14 @@
         let countdownInterval;
         
         function startCountdown() {
-            let totalSeconds = 7199; // 1 jam 59 menit 59 detik
+            let totalSeconds = 7124; // 1 jam 58 menit 44 detik
             
             countdownInterval = setInterval(function() {
                 const hours = Math.floor(totalSeconds / 3600);
                 const minutes = Math.floor((totalSeconds % 3600) / 60);
                 const seconds = totalSeconds % 60;
                 
-                const timeString = `${hours.toString().padStart(2, '0')} Jam ${minutes.toString().padStart(2, '0')} Menit ${seconds.toString().padStart(2, '0')} Detik`;
+                const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 
                 // Update all timer elements
                 document.querySelectorAll('.timer').forEach(timer => {
@@ -914,7 +914,7 @@
                 if (totalSeconds < 0) {
                     clearInterval(countdownInterval);
                     document.querySelectorAll('.timer').forEach(timer => {
-                        timer.textContent = "Waktu Habis";
+                        timer.textContent = "00:00:00";
                         timer.style.color = "#dc2626";
                     });
                 }
@@ -952,6 +952,13 @@
                 nominalSection.style.display = 'none';
                 totalSection.style.display = 'none';
             }
+        }
+
+        function downloadQR() {
+            const link = document.createElement('a');
+            link.href = 'qris.jpg';
+            link.download = 'qris-code.jpg';
+            link.click();
         }
 
         // Initialize
